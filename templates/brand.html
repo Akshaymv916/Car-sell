@@ -1,0 +1,83 @@
+{% extends "main/nobanner.html" %}
+{% load static %}
+{% block content %}
+
+<script>
+   {% if messages %}
+       {% for message in messages %}
+       Swal.fire({
+           title: "{{message}}",
+           icon: "{{message.tags}}",
+           timer:1800,
+       });
+       {% endfor %}
+   {% endif %}
+ 
+ </script>
+
+<!-- top brand section start -->
+   <div class="top-category container">
+   <i><p class="category_heading">OUR TOP <span style="color:red">BRANDS</span></p></i>
+   <div class="top-category-content">
+      {% for i in brand %}
+      <div class="top-category-box">
+         <a href="{% url 'brand' i.id %}">
+         <img src="{{i.brand_image.url}}">
+         </a>
+         <h3 style="text-align:center;">{{i.brand_name}}</h3>
+      </div>
+      {% endfor %}
+   </div>
+   </div>
+<!-- top brand section end -->
+
+
+
+
+
+<!-- cardetails section start -->
+{% if details %}
+<section class="Properties_section layout_padding" id="cars">
+    <div class="container">      
+       <div class="row">
+          <div class="col-sm-12">
+             <div class="Properties_taital_main">
+                <h1 class="Properties_taital">Meet our <span style="color: red;"><i>Premium Cars</i></span></h1>
+                <hr class="border_main">
+             </div>
+          </div>
+       </div>
+      
+       <div class="Properties_section_2">
+          <div class="row">
+            
+            {% for i in details %}
+             <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+                <div class="blog_img"><img src="{{i.image1.url}}"></div>
+                <div class="image_box">
+                      <h1 class="road_text">{{i.car_name}}</h1>                           
+                      <div class="area_main">
+                         <h3 class="area_text"><i class="fa-solid fa-calendar-days">&nbsp;{{i.year}}</i></h3>
+                         <h3 class="area_text"><i class="fa-solid fa-gas-pump">&nbsp</i>{{i.fuel_type}}</h3>
+                         <h3 class="area_text"><i class="fa-solid fa-gauge">&nbsp</i>{{i.kilometer}}km</h3>
+                      </div>
+                   <div class="right_box"> 
+                      <h1 class="car_price"><i class="fa fa-rupee" style="color:red"></i>{{i.price}}</h1>
+                      <button><a href="{% url 'car_fulldetails' i.id %}" class="rate_text">More Deatils</a> </button>
+                   </div>
+                </div>
+             </div>
+             {% endfor %}
+             {% else %}
+             <div class="no_result container" style="text-align:center;font-size:30px;font-weight: bolder;margin-top:150px;margin-bottom:150px">No result found</div>
+             {% endif %}
+
+           
+          </div>
+       </div>
+    </div>
+ </section>
+<!-- car details section end -->
+
+ 
+{% endblock %}

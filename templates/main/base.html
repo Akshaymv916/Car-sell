@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html>   
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Auto Start | Car Dealers</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      
+      <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/pagination.css' %}">
+      
+      <script src="https://kit.fontawesome.com/e89c04d720.js" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+
+      
+      <link rel="stylesheet" type="text/css" href="{% static 'css/normal.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/lightbox..css' %}">
+      <link rel="stylesheet" href="{% static 'css/singleproduct.css' %}">
+      <link rel="stylesheet" href="{% static 'css/imagepopup.css' %}">
+      <link rel="stylesheet" href="{% static 'css/nice-selects.css' %}">
+      
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <link href="{% static 'https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap' %}" rel="stylesheet">
+      <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   </head>
+
+    <body>
+      <div  id="loader"></div>
+
+         <!-- navbar section start -->
+         <div class="header_section">
+            <div class="container-fluid">
+               <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  <a href="{% url 'index' %}" class="navbar-brand"href="index.html"><img src="{% static 'images/carlogo.png' %}" style="width: 120px;"></a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                           <a class="nav-link" href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="{% url 'carsfull' %}">Cars</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="{% url 'carsell' %}">Sell Your Car</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% endif %}
+                        
+
+                     </ul>
+                     <form class="form-inline my-2 my-lg-0">
+                        {% if request.user.is_authenticated %}
+                        <div class="login_bt">
+                           <ul>
+                              <li><a style="color:yellow;text-transform:lowercase;opacity:0.5"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>{{request.user}}</a></li>
+                           </ul>
+                        </div>
+                        {% else %}
+                        <div class="login_bt">
+                           <ul>
+                              <li><a href="{% url 'login' %}"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Login</a></li>
+                           </ul>
+                        </div>
+                        {% endif %}
+                        <div class="header_search">
+                           <form action="/search/" method="get">
+                              {% csrf_token %}
+                              <input type="text" placeholder="Search" name="query" id="query" class="form_input" />
+                              <button class="search_btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                           </form>
+                       </div>
+                     </div>
+               </nav>
+            </div>
+         <!-- navbar section end -->
+
+
+         <!-- header section start -->
+         <div class="banner_section layout_padding">
+            <div class="container">
+               <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                     <div class="carousel-item active">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Find A Car</h1>
+                              <p class="banner_text">Most Trusted pre Owned Luxury Car Dealer In Kerala</p>
+                              <div class="started_text" style="color:black"><a onclick="window.open('https://wa.me/7994669916?text=Hello')">Contact Us</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Drive,Explore</h1>
+                              <p class="banner_text">Become a luxury car
+                                 owner with Auto Smart!</p>
+                              <div class="started_text"><a href="#">Contact Us</a></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- header section end -->
+         </div>
+         
+
+         {% block content %}
+         {% endblock content %}
+
+      <!-- footer section start -->
+      <div class="footer_section layout_padding">
+        <div class="container">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="location_text">
+                    <ul>
+                       <li>
+                          <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+                       </li>
+                       <li>
+                          <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                       </li>
+                       <li>
+                          <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                       </li>
+                    </ul>
+                 </div>
+              </div>
+              <div class="social_icon">
+                    <ul>
+                       <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                       <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                       <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    </ul>
+                 </div>
+           </div>
+           <div class="row">
+              <div class="col-md-4">
+                 <h3 class="footer_text">About Us</h3>
+                 <p class="lorem_text">We are Auto smart, South India's first choice pre owned luxury automobile dealer for many of the moto enthusiasts in Kerala. Our illustrious list of pre owned luxury car brands includes Porsche, We are Royal Drive, South India's first choice pre owned luxury automobile dealer for many of the moto enthusiasts in Kerala. Our illustrious list of pre owned luxury cars...</p>
+              </div>
+              <div class="col-md-4">
+                 <div class="image_main">
+                    <div class="image_10"><img src="{% static 'images/carlogo.png' %}" style="width: 200px;margin-left: 50px;"></div>
+                 </div>
+              </div>
+              <div class="col-md-4">
+                 <h3 class="footer_text">Popular Brands</h3>
+                 <div class="footer_menu">
+                    <ul>
+                       <li>Audi</li>
+                       <li>Bmw</li>
+                       <li>Mini cooper</li>
+                       <li>Mazda</li>
+                       <li>Porsche</li>
+                       <li>MercedesBenz</li>
+                       <li>Land Rover</li>
+
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- footer section end -->
+
+     <!-- copyright section start -->
+     <div class="copyright_section">
+        <div class="container">
+           <p class="copyright_text">2024 All Rights Reserved. Design by Auto smart</p>
+        </div>
+     </div>
+     <!-- copyright section end -->
+
+     
+      <!-- Javascript files-->
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/popper.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+      <script src="{% static 'js/plugins.min.js' %}"></script>
+      <!-- sidebar -->
+      <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+      <!-- javascript --> 
+      <script src="{% static 'js/custom.js' %}"></script>
+      <script src="{% static 'js/vendor/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/vendor/jquery-3.6.0.min.js' %}"></script>
+      <script src="{% static 'js/vendor/jquery-migrate-3.3.2.min.js' %}"></script>
+      <script src="{% static 'js/vendor/modernizr-3.11.2.min.js' %}"></script>
+      <script src="{% static 'js/plugins/jquery.countdown.min.js' %}"></script>
+      <script src="{% static 'js/plugins/swiper-bundle.min.js' %}"></script>
+      <script src="{% static 'js/plugins/scrollUp.js' %}"></script>
+      <script src="{% static 'js/plugins/venobox.min.js' %}"></script>
+      <script src="{% static 'js/plugins/jquery-ui.min.js' %}"></script>
+      <script src="{% static 'js/plugins/mailchimp-ajax.js' %}"></script>
+
+      <script src="{% static 'js/vendor.min.js' %}"></script>
+      <script src="{% static 'js/plugins.min.js' %}"></script>
+      <script src="{% static 'js/main.min.js' %}"></script>
+
+      <script src="{% static 'js/main.js' %}"></script>
+      <script src="{% static 'js/loader.js' %}"></script>
+      <script src="{% static 'js/lightbox.js' %}"></script>
+      <script>
+         // Material Select Initialization
+         $(document).ready(function() {
+         $('.mdb-select').materialSelect();
+         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+         $(this).closest('.select-outline').find('label').toggleClass('active');
+         $(this).closest('.select-outline').find('.caret').toggleClass('active');
+         });
+         });
+
+
+
+         
+      </script>
+   </body>
+</html>

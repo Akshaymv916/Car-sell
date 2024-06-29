@@ -1,0 +1,14 @@
+.swiper-wrapper{
+    position: relative;
+    display: flex;
+}
+.image-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-gap: 20px;
+}
+
+.image-container img{
+    width: 100vh;
+}
+

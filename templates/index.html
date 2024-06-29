@@ -1,0 +1,150 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<script>
+   {% if messages %}
+       {% for message in messages %}
+       Swal.fire({
+           title: "{{message}}",
+           icon: "{{message.tags}}",
+           timer:1800,
+       });
+       {% endfor %}
+   {% endif %}
+ 
+ </script>
+
+<!-- tobrand section start -->
+<div class="top-category container">
+   <i><p class="category_heading">OUR TOP <span style="color:red">BRANDS</span></p></i>
+   <div class="top-category-content">
+      {% for i in brand %}
+      <div class="top-category-box">
+         <a href="{% url 'brand' i.id %}">
+         <img src="{{i.brand_image.url}}">
+         </a>
+         <h3 style="text-align:center;">{{i.brand_name}}</h3>
+      </div>
+      {% endfor %}
+   </div>
+</div>
+<!-- topbrand section end -->
+
+<!-- car container section start -->
+<section class="Properties_section layout_padding" id="cars">
+    <div class="container">      
+       <div class="row">
+          <div class="col-sm-12">
+             <div class="Properties_taital_main">
+                <h1 class="Properties_taital">Meet The <span style="color: red;"><i>Newest</i></span> Members Of Our Garage</h1>
+                <hr class="border_main">
+             </div>
+          </div>
+       </div>
+      
+       <div class="Properties_section_2">
+          <div class="row">
+            {% if details %}
+            {% for i in details %}
+             <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+                <div class="blog_img"><img src="{{i.image1.url}}"></div>
+                <div class="image_box">
+                      <h1 class="road_text">{{i.car_name}}</h1>                           
+                      <div class="area_main">
+                         <h3 class="area_text"><i class="fa-solid fa-calendar-days">&nbsp;{{i.year}}</i></h3>
+                         <h3 class="area_text"><i class="fa-solid fa-gas-pump">&nbsp</i>{{i.fuel_type}}</h3>
+                         <h3 class="area_text"><i class="fa-solid fa-gauge">&nbsp</i>{{i.kilometer}}km</h3>
+                      </div>
+                   <div class="right_box"> 
+                      <h1 class="car_price"><i class="fa fa-rupee" style="color:red"></i>{{i.price}}</h1>
+                      <button><a href="{% url 'car_fulldetails' i.id %}" class="rate_text">More Deatils</a> </button>
+                   </div>
+                </div>
+             </div>
+             {% endfor %}
+             {% else %}
+             <div class="no_result container" style="text-align:center;font-size:20px;font-weight: bolder;margin-top:20px">No result found</div>
+             {% endif %}
+
+           
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- car container section end -->
+
+ <!-- our mission section start -->
+ <div class="blog_section layout_padding">
+    <div class="container">
+       <div class="row">
+          <div class="col-sm-12">
+             <div class="blog_taital_main">
+                <h1 class="blog_taital">Our Mission</h1>
+                <hr class="blog_border_main">
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="blog_section_2">
+       <div class="container-fluid">
+           <div class="row">
+              <div class="col-md-6">
+                <div class="blog_text_main">
+                   <p class="blog_text">Our Mission is to simply become the best at what we do. We started off humbly and within a span of 10 years, we have two spectacular showrooms which are at par with any luxury automobile showroom in India. We are in this business because of our deep rooted love for the machine and therefore, when you, a customer, comes looking for your dream car, we make sure that you drive off with exactly what you came looking for, without wasting your valuable time. We are here to serve you and serve you well. We at Royal drive, put our foot down, when it comes to making the process of purchasing a pre-owned vehicle hassle free. Customer concerns regarding the documentations, history or past ownerships and other legalities are all addressed and taken care of with utmost precision and authority. Every single automobile in our inventory is subjected to the highest level of scrutiny, to assure our customers a pleasant and hurdle free experience. Our promise is to add to your power and we will leave no stone unturned in doing so. So, are you ready to add to your power?</p>                     </div>
+             </div>
+             <div class="col-md-6">
+                <div class="blog_img"><img src="{% static 'images/carblue.png' %}"></div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- our mission section end -->
+
+ <!-- request call section start -->
+ <div class="contact_section layout_padding" id="call-back">
+    <div class="container">
+       <div class="row">
+          <div class="col-sm-12">
+             <div class="contact_taital_main">
+                <h1 class="contact_taital">Requeste A Call Back</h1>
+                <hr class="contact_border_main">
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="container-fluid">
+       <div class="contact_section_2">
+          <div class="row">
+             <div class="col-md-6">
+                <div class="mail_section map_form_container">
+                   <form method='post' action="{% url 'reqcall' %}">
+                     {% csrf_token %}
+                   <input type="text" class="mail_text" placeholder="Name" name="name" id="name" required/>
+                   <input type="text" class="mail_text" placeholder="Phone Number" name="number" id="number"required/> 
+                   <input type="email" class="mail_text" placeholder="Email" name="mail" id="mail" required/>
+                   <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="msg" id="msg" required/></textarea>
+                   <div class="btn_main">
+                      <button class="send_bt" type="submit" ><a>Send Now</a></button>
+                   </div>
+                   </form>
+                   <div class="map_main map_container">
+                      <div class="map-responsive">
+                         <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="368" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                          <div class="btn_main">
+                            <div class="map_bt d-flex justify-content-center w-100 map_center"><a href="#" id="showForm">Form</a></div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-md-6">
+                <div class="contact_img"><img src="{% static 'images/3car.png' %}"></div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- request call section end -->
+{% endblock %}

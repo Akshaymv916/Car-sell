@@ -1,0 +1,90 @@
+{% extends "main/nobanner.html" %}
+{% load static %}
+{% block content %}
+
+<script>
+  {% if messages %}
+      {% for message in messages %}
+      Swal.fire({
+          title: "{{message}}",
+          icon: "{{message.tags}}",
+          timer:1800,
+      });
+      {% endfor %}
+  {% endif %}
+
+</script>
+
+<link rel="stylesheet" href="{% static 'css/carsel.css' %}">
+
+<!-- carsell section start -->
+<div class="car-sell container">
+    <header><i class="fa-solid fa-address-book"></i>&nbsp;Contact Informations</header>
+      <form action="{% url 'addcar' %}" class="form" method='post'>
+        {% csrf_token %}
+        <div class="input-box">
+          <input type="text" placeholder="Enter full name" name='seller_name' id="seller_name" required />
+        </div>
+        <div class="column">
+          <div class="input-box">
+            <input type="number" placeholder="Enter phone number" name='number' id="number" required />
+          </div>
+          <div class="input-box">
+            <input type="text" placeholder="Enter email address" name='email' id="email" required />
+        </div>
+        </div>
+        <header><i class="fa-solid fa-car"></i>&nbsp;Vechical Informations</header>
+        <div class="input-box address">
+          <input type="text" placeholder="Enter car name" name='car_name' id="car_name" required />
+          <input type="text" placeholder="Enter Price" name='car_price' id="car_price" required />
+          <div class="column">
+            <div class="select-box">
+              <select id="brands" name='brands'>
+                
+                {% for i in brand %}
+                <option hidden>Brand</option>
+                <option value="{{i.brand_name}}">{{i.brand_name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="select-box">
+                <select id="fuel_type" name='fuel_type'>
+                    <option hidden>Fuel</option>
+                  {% for i in fuel %}
+                  <option value={{i.fuel}}>{{i.fuel}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="select-box">
+                <select id="color" name='color'>
+                    <option hidden>Color</option>
+                    {% for i in color %}
+                    <option value={{i.color_name}}>{{i.color_name}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+          </div>
+          <div class="column">
+            <input type="file" placeholder="Select your car image" name="image1" id="image1" required />
+            <input type="file" placeholder="Select your car another image" name="image2" id="image2" required />
+          </div>
+          <div class="column">
+            <div class="select-box">
+                <select id="year" name="year">
+                  <option hidden>Year</option>
+                  <option>2020</option>
+                  <option>2019</option>
+                  <option>2018</option>
+                  <option value="2017">2017</option>
+                </select>
+              </div>
+              <input type="number" placeholder="Enter total kilometers" name="kilometer" id="kilometer" required />
+              <input type="number" placeholder="Enter no of owners" name="owners"  id="owners" required />
+          </div>
+          <textarea id="textareaInput" name="features" rows="10" cols="50" placeholder="Enter your car features here..."></textarea><br><br>
+        </div>
+        <button>Submit</button>
+      </form>
+</div>
+<!-- carsell section end -->
+{% endblock %}

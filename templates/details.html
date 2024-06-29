@@ -1,0 +1,81 @@
+{% extends "main/nobanner.html" %}
+{% load static %}
+{% block content %}
+
+<!-- cardetails section start -->
+<div class="product-details-area pt-100px pb-100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
+                <div class="swiper-container zoom-top">
+                    <div class="swiper-wrapper">
+                        <div class="image-container">
+                            <a href="{{details.image1.url}}" data-lightbox="models" data-title="caption1">
+                                <img class="img-responsive m-auto" src="{{details.image1.url}} "alt="">
+                            </a>
+                            <a href="{{details.image2.url}}" data-lightbox="models" data-title="caption1">
+                                <img class="img-responsive m-auto" src="{{details.image2.url}}" alt="">
+                            </a>
+                            <a href="{{details.image3.url}}" data-lightbox="models" data-title="caption1">
+                                <img class="img-responsive m-auto" src="{{details.image3.url}}" alt="">
+                            </a>
+                            <a href="{{details.image4.url}}" data-lightbox="models" data-title="caption1">
+                                <img class="img-responsive m-auto" src="{{details.image4.url}}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-details-content quickview-content ml-25px">
+                    <h2>{{details.car_name}}</h2>
+                    <div class="pricing-meta">
+                        <ul class="d-flex">
+                            <li class="newprice"><i class="fa fa-rupee" style="color:red"></i>{{details.price}}</li>
+                        </ul>
+                    </div>    
+                    <div class="pro-details-categories-info pro-details-same-style d-flex m-2">
+                        <ul class="d-flex" style="gap: 60px;padding-top: 10px;">
+                            <h3 class="area_text"><i class="fa-solid fa-calendar-days">&nbsp;{{details.year}}</i></h3>
+                            <h3 class="area_text"><i class="fa-solid fa-gas-pump">&nbsp;{{details.fuel_type}}</i></h3>
+                            <h3 class="area_text"><i class="fa-solid fa-gauge">&nbsp;{{details.kilometer}}km</i></h3>
+                        </ul>
+                    </div>
+                    <div class="pro-details-quality">
+                        <div class="pro-details-cart">
+                                    <button onclick="window.open('https://wa.me/7994669916?text=Hello')"><a href="#" class="add-cart">Call for deatils</a></button>
+                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="description-review-wrapper">
+                    <div class="description-review-topbar nav">
+                        <button data-bs-toggle="tab" data-bs-target="#des-details2">Information</button>
+                        <button   class="active" data-bs-toggle="tab" data-bs-target="#des-details1">Features</button>
+                    </div>
+                    <div class="tab-content description-review-bottom">
+                        <div id="des-details2" class="tab-pane">
+                            <div class="product-anotherinfo-wrapper text-start">
+                                <ul>
+                                    <h3>price:               <span  style="color: red;">{{details.price}}</span></h3>
+                                    <h3>Year:                <span  style="color: red;">{{details.year}}</span></h3>
+                                    <h3>Kilometer:           <span  style="color: red;">{{details.kilometer}}</span></h3>
+                                    <h3>Fueal type:          <span  style="color: red;">{{details.fuel_type}}</span></h3>
+                                    <h3>Color:               <span  style="color: red;">{{details.color}}</span></h3>
+                                    <h3>No.Of Owners:      <span  style="color: red;">{{details.owners}}</span></h3>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="#des-details1" class="tab-pane active">
+                            <div class="product-description-wrapper">
+                               {{details.features | safe}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- cardetails section end -->
+{% endblock %}
