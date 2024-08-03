@@ -30,5 +30,4 @@ Hi guys... 🖐️
   - If a user likes a car, they can click the "Call for more details" button to be redirected to the owner's WhatsApp.
 
 
-![Description of the image](screenshots/Screenshot (206).png)
-
+![Description of the image](screenshots/Screenshot%20(206).png)
